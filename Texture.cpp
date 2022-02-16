@@ -9,7 +9,7 @@ namespace libGraphic
 	Texture::Texture(const char* path) : data(nullptr), widthImage(0), heightImage(0), texture(0)
 	{
 		glGenTextures(1, &texture);
-		glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
+		//glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);	//allow color image
 

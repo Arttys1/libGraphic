@@ -8,6 +8,7 @@
 
 #include "ShapeCollection.h"
 #include "Shader.h"
+#include "Camera.h"
 
 namespace libGraphic
 {
@@ -19,7 +20,11 @@ namespace libGraphic
 		GLFWwindow* window;
 		ShapeCollection* collection;
 		Shader* shader;
+		Camera* camera;
 		Color backgroundColor;
+
+		void processInput(GLFWwindow *window);
+		void mouseInput(GLFWwindow *window);
 
 	public:
 		Window(unsigned int width = 900, unsigned int height = 600, const char* title = "");

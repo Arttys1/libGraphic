@@ -14,6 +14,7 @@ namespace libGraphic
 	public:
 		Texture(const char* path);
 		~Texture();
+		int getId() const;
 
 		void use();
 	};

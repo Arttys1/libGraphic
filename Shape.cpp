@@ -28,12 +28,14 @@ namespace libGraphic
 	{
 		this->texture = texture;
 	}
-	void Shape::useTexture() const
+	bool Shape::useTexture() const
 	{
 		if (texture)
 		{
 			texture->use();
+			return true;
 		}
+		return false;
 	}
 	void Shape::addRotation(Vector3D angle)
 	{
