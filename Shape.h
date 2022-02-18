@@ -33,6 +33,7 @@ namespace libGraphic
 		
 		void setTexture(Texture* texture);
 		bool useTexture() const;
+		int getIdTexture() const;
 
 		// Hérité via ITransformable
 		virtual void addRotation(Vector3D angle) override;

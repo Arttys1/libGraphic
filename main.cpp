@@ -1,14 +1,12 @@
 #include "libGraphic.h"
-
 using namespace libGraphic;
 
 int main()
 {
-
 	libGraphic::Window window(900, 600, "test");
 	window.setBackgroundColor(Color(0.f, 0.f, 0.35f));
 	
-	Triangle *tri = new Triangle(new Vector3D(), -1.f, 1.f, Color::RED());
+	Triangle* tri = new Triangle(new Vector3D(), -1.f, 1.f, Color::RED());
 	tri->setTexture(new Texture("ciel.jpg"));
 	window.addShape(tri);
 	/*window.addShape(new Triangle(new Vector3D(), 1.f, -1.f, Color::BLACK()));
@@ -30,7 +28,7 @@ int main()
 	window.addShape(new Cube(new Vector3D(2.4f, -0.4f, -3.5f), 1.f, 1.f, 1.f));
 
 	for (Shape* s : window.getShapes()) {
-		s->addRotationTime(glm::radians(50.f), Vector3D(0.5f, 1.0f, 0));
+		//s->addRotationTime(glm::radians(50.f), Vector3D(0.5f, 1.0f, 0));
 	}
 
 	window.loop();

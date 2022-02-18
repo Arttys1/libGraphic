@@ -37,7 +37,7 @@ namespace libGraphic
 		// Initialise GLFW
 		if (!glfwInit())
 		{
-			throw new std::exception("Failed to initialize GLFW");
+			throw std::exception("Failed to initialize GLFW");
 		}
 
 		//glfw's parameters
@@ -50,20 +50,22 @@ namespace libGraphic
 		window = glfwCreateWindow(width, height, title, NULL, NULL);
 		if (!window) {
 			glfwTerminate();
-			throw new std::exception("Failed to open GLFW window");
+			throw std::exception("Failed to open GLFW window");
 		}
 		glfwMakeContextCurrent(window);
 
 		// Initialize GLEW
 		if (glewInit() != GLEW_OK) {
 			glfwTerminate();
-			throw new std::exception("Failed to initialize GLEW");
+			throw std::exception("Failed to initialize GLEW");
 		}	
 
 		//set input on
 		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+		//init Texture
+		Texture::initTexture();
 
 		//define defaults shaders
 		const char* vertexShaderSource = "shader/vertexShader.glsl";
@@ -114,6 +116,7 @@ namespace libGraphic
 		model = glm::rotate(model, glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 projection;
 		projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
+		//projection = glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.1f, 100.f);
 
 		//use our shaders
 		shader->use();
@@ -147,11 +150,11 @@ namespace libGraphic
 				shader->setVec3("color", glm::vec3(color.getRed(), color.getGreen(), color.getBlue()));
 				shader->setMat4("transform", s->getTransformation());
 				shader->setBool("readTexture", s->useTexture());
+				shader->setInt("texture1", s->getIdTexture());
 
 				glDrawArrays(GL_TRIANGLES, count , 3 * s->getCountTriangle());
 				count += 3 * s->getCountTriangle();
 			}
-
 
 			// Swap buffers
 			glfwSwapBuffers(window);
@@ -161,12 +164,16 @@ namespace libGraphic
 
 			//wait aprox 16 millisecond to have 60fps
 			double endframe = glfwGetTime();
+			
+			double waitTime = 16.0 - ((endframe - startframe) * 1000);
+			waitTime = waitTime > 0.0 ? waitTime : 0.0;
+			std::cout << waitTime << std::endl;
 #ifdef _WIN32
-			Sleep(16.0 - (endframe - startframe));
+			Sleep((DWORD)waitTime);
 #endif // _WIN32
 
 #ifdef __linux__
-			sleep((16.0 - (endframe - startframe))/1000.0);
+			usleep((unsigned int)(waitTime/1000.0));
 #endif // __linux__
 
 		}

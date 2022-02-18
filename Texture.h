@@ -11,12 +11,14 @@ namespace libGraphic
 		int widthImage;
 		int heightImage;
 		unsigned int texture;
+		int id;
 	public:
 		Texture(const char* path);
 		~Texture();
 		int getId() const;
 
 		void use();
+		static void initTexture();
 	};
 }
 

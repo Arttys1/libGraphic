@@ -37,6 +37,12 @@ namespace libGraphic
 		}
 		return false;
 	}
+	int Shape::getIdTexture() const
+	{
+		if(texture)
+			return texture->getId();
+		return -1;
+	}
 	void Shape::addRotation(Vector3D angle)
 	{
 		transformation->addRotation(angle);
