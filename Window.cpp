@@ -14,13 +14,13 @@ namespace libGraphic
 {
 	void Window::processInput(GLFWwindow* window)
 	{
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_UP))
 			camera->advance();
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_DOWN))
 			camera->stepBack();
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_LEFT))
 			camera->left();
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT))
 			camera->right();
 
 	}
@@ -28,7 +28,7 @@ namespace libGraphic
 	{
 		double posX, posY;
 		glfwGetCursorPos(window, &posX, &posY);
-		camera->moveCamera(posX, posY);
+		camera->moveCamera((float)posX, (float)posY);
 		
 	}
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
@@ -163,11 +163,9 @@ namespace libGraphic
 			glfwPollEvents();
 
 			//wait aprox 16 millisecond to have 60fps
-			double endframe = glfwGetTime();
-			
+			double endframe = glfwGetTime();			
 			double waitTime = 16.0 - ((endframe - startframe) * 1000);
 			waitTime = waitTime > 0.0 ? waitTime : 0.0;
-			std::cout << waitTime << std::endl;
 #ifdef _WIN32
 			Sleep((DWORD)waitTime);
 #endif // _WIN32

@@ -50,13 +50,11 @@ namespace libGraphic
 			yaw += xoffset;
 			pitch += yoffset;
 
-			if (pitch > 89.0f)
-				pitch = 89.0f;
-			if (pitch < -89.0f)
-				pitch = -89.0f;
+			pitch = pitch > 89.0f ? 89.0f : pitch;
+			pitch = pitch < -89.0f ? -89.0f : pitch;
 
 			//change the direction of the camera
-			glm::vec3 direction;
+			glm::vec3 direction{};
 			direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 			direction.y = sin(glm::radians(pitch));
 			direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));

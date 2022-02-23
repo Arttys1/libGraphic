@@ -22,6 +22,16 @@ namespace libGraphic
 		void setZ(float z);
 
 		glm::vec3 toGlmVec() const;
+
+		Vector3D operator*(Vector3D& const);
+		Vector3D operator+(Vector3D& const);
+		Vector3D operator-(Vector3D& const);
+		Vector3D operator/(Vector3D& const);
+		Vector3D operator*(float& const);
+		Vector3D operator+(float& const);
+		Vector3D operator-(float& const);
+		Vector3D operator/(float& const);
+
 	};
 }
 

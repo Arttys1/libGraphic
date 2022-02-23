@@ -173,7 +173,6 @@
     <ClInclude Include="ITransformable.h" />
     <ClInclude Include="libGraphic.h" />
     <ClInclude Include="Rectangle.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeCollection.h" />
