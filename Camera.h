@@ -1,4 +1,6 @@
 #pragma once
+#ifndef H_CAMERA
+#define H_CAMERA
 #include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -30,3 +32,5 @@ namespace libGraphic
 		
 	};
 }
+
+#endif //!H_CAMERA

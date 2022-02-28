@@ -4,12 +4,9 @@ This is a little 3D graphic library. It's a personal project where i can learn o
 Curently, the library can render simple shape like triangle, rectangle or cube and apply color and texture on it.
 You can apply transformation like rotation or translation on the shapes.
 
-There is a lot a bug with texture that i must solve but i'm in progress :D
-
 things to do :
 
-- solve bugs with texture
+- make texture shareable with severals shapes
 - add lights options
-- add camera movements
 - make the lib portable on linux
 - and many others :D

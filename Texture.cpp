@@ -35,11 +35,7 @@ namespace libGraphic
 	Texture::~Texture()
 	{
 		//clean memory
-		if (data != NULL)
-		{
-			//delete data;
-			data = NULL;
-		}
+		delete data;
 		glDeleteBuffers(1, &texture);
 	}
 	int Texture::getId() const

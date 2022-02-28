@@ -12,11 +12,11 @@ namespace libGraphic
 	}
 	void Camera::advance()
 	{
-		cameraPosition += spead * glm::vec3(0.0f, 0.0f, -1.0f);
+		cameraPosition += spead * cameraFront;
 	}
 	void Camera::stepBack()
 	{
-		cameraPosition -= spead * glm::vec3(0.0f, 0.0f, -1.0f);
+		cameraPosition -= spead * cameraFront;
 	}
 	void Camera::right()
 	{

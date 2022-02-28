@@ -35,35 +35,35 @@ namespace libGraphic
     {
         return glm::vec3(x, y, z);
     }
-    Vector3D Vector3D::operator*(Vector3D& const v)
+    Vector3D Vector3D::operator*(Vector3D& v) const
     {
         return Vector3D(x * v.x, y * v.y, z * v.z);
     }
-    Vector3D Vector3D::operator+(Vector3D& const v)
+    Vector3D Vector3D::operator+(Vector3D& v) const
     {
         return Vector3D(x + v.x, y + v.y, z + v.z);
     }
-    Vector3D Vector3D::operator-(Vector3D& const v)
+    Vector3D Vector3D::operator-(Vector3D& v) const
     {
         return Vector3D(x - v.x, y - v.y, z - v.z);
     }
-    Vector3D Vector3D::operator/(Vector3D& const v)
+    Vector3D Vector3D::operator/(Vector3D& v) const
     {
         return Vector3D(x / v.x, y / v.y, z / v.z);
     }
-    Vector3D Vector3D::operator*(float& const f)
+    Vector3D Vector3D::operator*(float& f) const
     {
         return Vector3D(x * f, y * f, z * f);
     }
-    Vector3D Vector3D::operator+(float& const f)
+    Vector3D Vector3D::operator+(float& f) const
     {
         return Vector3D(x + f, y + f, z + f);
     }
-    Vector3D Vector3D::operator-(float& const f)
+    Vector3D Vector3D::operator-(float& f) const
     {
         return Vector3D(x - f, y - f, z - f);
     }
-    Vector3D Vector3D::operator/(float& const f)
+    Vector3D Vector3D::operator/(float& f) const
     {
         return Vector3D(x / f, y / f, z / f);
     }

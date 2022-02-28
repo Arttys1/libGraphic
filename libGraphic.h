@@ -22,5 +22,6 @@
 #include "ITransformable.h"
 #include "Transformation.h"
 #include "Vector3D.h"
+#include "Camera.h"
 
 #endif //H_LIBGRAPHIC
