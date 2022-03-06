@@ -5,6 +5,7 @@ int main()
 {
 	libGraphic::Window window(900, 600, "test");
 	window.setBackgroundColor(Color(0.f, 0.f, 0.35f));
+	window.setFramerateLimit(60);
 
 	for (size_t i = 0; i < 10; i++)
 	{
@@ -15,7 +16,6 @@ int main()
 			window.addShape(cube);
 		}
 	}
-
 
 
 	window.loop();

@@ -1,5 +1,4 @@
 #pragma once
-#include "Vector3D.h"
 #ifndef H_SHAPE
 #define H_SHAPE
 #include <vector>
@@ -7,6 +6,7 @@
 #include "Transformation.h"
 #include "ITransformable.h"
 #include "Texture.h"
+#include "Vector3D.h"
 
 namespace libGraphic
 {

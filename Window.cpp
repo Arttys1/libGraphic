@@ -32,7 +32,9 @@ namespace libGraphic
 		
 	}
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
-		width(width), height(height), window(nullptr), collection(new ShapeCollection()), backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height))
+		width(width), height(height), window(nullptr), collection(new ShapeCollection()),
+		backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height)),
+		framerateLimit(60)
 	{
 		// Initialise GLFW
 		if (!glfwInit())
@@ -124,6 +126,9 @@ namespace libGraphic
 		shader->setMat4("model", model);
 		shader->setMat4("projection", projection);
 
+		double timeToWaitAtEachFrame = (1.0 / framerateLimit) * 1000;
+		std::cout << timeToWaitAtEachFrame << std::endl;
+
 		while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 			glfwWindowShouldClose(window) == 0) {
 
@@ -164,8 +169,9 @@ namespace libGraphic
 
 			//wait aprox 16 millisecond to have 60fps
 			double endframe = glfwGetTime();			
-			double waitTime = 16.0 - ((endframe - startframe) * 1000);
+			double waitTime = timeToWaitAtEachFrame - ((endframe - startframe) * 1000);
 			waitTime = waitTime > 0.0 ? waitTime : 0.0;
+			std::cout << waitTime << std::endl;
 #ifdef _WIN32
 			Sleep((DWORD)waitTime);
 #endif // _WIN32
@@ -192,5 +198,9 @@ namespace libGraphic
 	std::vector<Shape*> Window::getShapes() const
 	{
 		return collection->getShapes();
+	}
+	void Window::setFramerateLimit(unsigned char limit)
+	{
+		framerateLimit = limit;
 	}
 }

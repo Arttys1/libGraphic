@@ -1,11 +1,13 @@
 #pragma once
+#ifndef H_TRANSFORMATION
+#define H_TRANSFORMATION
+
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "Vector3D.h"
 #include "GLFW/glfw3.h"
 #include "ITransformable.h"
 #include <vector>
-#include <functional>
 
 namespace libGraphic
 {
@@ -44,3 +46,5 @@ namespace libGraphic
 		glm::mat4 getTransformation() const;
 	};
 }
+
+#endif // !H_TRANSFORMATION

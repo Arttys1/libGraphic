@@ -1,4 +1,7 @@
 #pragma once
+#ifndef H_ITRANSFORMABLE
+#define H_ITRANSFORMABLE
+
 #include "Vector3D.h"
 
 namespace libGraphic
@@ -20,3 +23,4 @@ namespace libGraphic
 		virtual glm::mat4 getTransformation() const = 0;
 	};
 }
+#endif // !H_ITRANSFORMABLE

@@ -22,6 +22,7 @@ namespace libGraphic
 		Shader* shader;
 		Camera* camera;
 		Color backgroundColor;
+		unsigned char framerateLimit;
 
 		void processInput(GLFWwindow *window);
 		void mouseInput(GLFWwindow *window);
@@ -33,6 +34,7 @@ namespace libGraphic
 		void addShape(Shape*);
 		void setBackgroundColor(Color);
 		std::vector<Shape*> getShapes() const;
+		void setFramerateLimit(unsigned char limit);
 
 	};
 }

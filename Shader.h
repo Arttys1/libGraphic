@@ -1,4 +1,7 @@
 #pragma once
+#ifndef H_SHADER
+#define H_SHADER
+
 #include "GL/glew.h"
 #include <string>
 #include "glm/glm.hpp"
@@ -27,3 +30,5 @@ namespace libGraphic
 		unsigned int getId() const;
 	};
 }
+
+#endif // !H_SHADER
