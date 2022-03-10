@@ -34,7 +34,7 @@ namespace libGraphic
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
 		width(width), height(height), window(nullptr), collection(new ShapeCollection()),
 		backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height)),
-		framerateLimit(60)
+		framerateLimit(60), callBack()
 	{
 		// Initialise GLFW
 		if (!glfwInit())
@@ -127,7 +127,6 @@ namespace libGraphic
 		shader->setMat4("projection", projection);
 
 		double timeToWaitAtEachFrame = (1.0 / framerateLimit) * 1000;
-		std::cout << timeToWaitAtEachFrame << std::endl;
 
 		while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 			glfwWindowShouldClose(window) == 0) {
@@ -144,6 +143,11 @@ namespace libGraphic
 			//set camera matrix
 			glm::mat4 view = camera->getView();
 			shader->setMat4("view", view);
+
+			if (callBack)
+			{
+				callBack();
+			}
 
 			//draw, color, texture and transform shape
 			int count = 0;
@@ -202,5 +206,9 @@ namespace libGraphic
 	void Window::setFramerateLimit(unsigned char limit)
 	{
 		framerateLimit = limit;
+	}
+	void Window::setCallBackFunction(void func())
+	{
+		callBack = [func]() {func();};
 	}
 }

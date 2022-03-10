@@ -10,6 +10,8 @@
 #include "Shader.h"
 #include "Camera.h"
 
+#include <functional>
+
 namespace libGraphic
 {
 	class Window
@@ -23,6 +25,7 @@ namespace libGraphic
 		Camera* camera;
 		Color backgroundColor;
 		unsigned char framerateLimit;
+		std::function<void()> callBack;
 
 		void processInput(GLFWwindow *window);
 		void mouseInput(GLFWwindow *window);
@@ -35,6 +38,7 @@ namespace libGraphic
 		void setBackgroundColor(Color);
 		std::vector<Shape*> getShapes() const;
 		void setFramerateLimit(unsigned char limit);
+		void setCallBackFunction(void());
 
 	};
 }
