@@ -36,19 +36,19 @@ namespace libGraphic
 		int getIdTexture() const;
 
 		// Hérité via ITransformable
-		virtual void addRotation(Vector3D angle) override;
-		virtual void addRotationTime(float rotationSpeed, Vector3D angle) override;
+		virtual void addRotationX(float axis) override;
+		virtual void addRotationY(float axis) override;
+		virtual void addRotationZ(float axis) override;
 
-		virtual void addTranslation(Vector3D trans) override;
-		virtual void addTranslationTime(float translationSpeed, Vector3D trans) override;
+		virtual void addTranslationX(float trans) override;
+		virtual void addTranslationY(float trans) override;
+		virtual void addTranslationZ(float trans) override;
 
-		virtual void addScale(Vector3D scale) override;
-		virtual void addScale(float scalar) override;
-		virtual void addScaleTime(float scaleSpeed, Vector3D scale) override;
-		virtual void addScaleTime(float scaleSpeed, float scalar) override;
+		virtual void addScaleX(float scale) override;
+		virtual void addScaleY(float scale) override;
+		virtual void addScaleZ(float scale) override;
 
 		virtual glm::mat4 getTransformation() const override;
-
 	};
 }
 #endif // !H_SHAPE

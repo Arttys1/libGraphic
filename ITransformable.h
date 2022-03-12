@@ -8,17 +8,18 @@ namespace libGraphic
 {
 	class ITransformable
 	{
-		virtual void addRotation(Vector3D angle) = 0;
-		virtual void addRotationTime(float rotationSpeed, Vector3D angle) = 0;
+		virtual void addRotationX(float axis) = 0;
+		virtual void addRotationY(float axis) = 0;
+		virtual void addRotationZ(float axis) = 0;
 
-		virtual void addTranslation(Vector3D trans) = 0;
-		virtual void addTranslationTime(float translationSpeed, Vector3D trans) = 0;
 
-		virtual void addScale(Vector3D scale) = 0;
-		virtual void addScale(float scalar) = 0;
-		virtual void addScaleTime(float scaleSpeed, Vector3D scale) = 0;
-		virtual void addScaleTime(float scaleSpeed, float scalar) = 0;
+		virtual void addTranslationX(float trans) = 0;
+		virtual void addTranslationY(float trans) = 0;
+		virtual void addTranslationZ(float trans) = 0;
 
+		virtual void addScaleX(float scale) = 0;
+		virtual void addScaleY(float scale) = 0;
+		virtual void addScaleZ(float scale) = 0;
 
 		virtual glm::mat4 getTransformation() const = 0;
 	};

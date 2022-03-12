@@ -19,30 +19,23 @@ namespace libGraphic
 	{
 	private:
 		glm::mat4 transform;
-		std::vector<TransformationType> types;
-		std::vector<float> speeds;
-		std::vector<Vector3D> angles;
-		
-		static float getUniformTime();
-		void addOperationInQueue(TransformationType, float, Vector3D);
-
-		glm::mat4 RotationTime(float, Vector3D);
 
 	public:
-		Transformation();
+		Transformation();		
 
-		void addRotation(Vector3D angle);
-		void addRotationTime(float rotationSpeed, Vector3D angle);
+		// Hérité via ITransformable
+		virtual void addRotationX(float axis) override;
+		virtual void addRotationY(float axis) override;
+		virtual void addRotationZ(float axis) override;
 
-		void addTranslation(Vector3D trans);
-		void addTranslationTime(float translationSpeed, Vector3D trans);
+		virtual void addTranslationX(float trans) override;
+		virtual void addTranslationY(float trans) override;
+		virtual void addTranslationZ(float trans) override;
 
-		void addScale(Vector3D scale);
-		void addScale(float scalar);
-		void addScaleTime(float scaleSpeed, Vector3D scale);
-		void addScaleTime(float scaleSpeed, float scalar);
+		virtual void addScaleX(float scale) override;
+		virtual void addScaleY(float scale) override;
+		virtual void addScaleZ(float scale) override;
 		
-
 		glm::mat4 getTransformation() const;
 	};
 }

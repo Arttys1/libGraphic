@@ -39,6 +39,7 @@ namespace libGraphic
 		std::vector<Shape*> getShapes() const;
 		void setFramerateLimit(unsigned char limit);
 		void setCallBackFunction(void());
+		void updateObjectPosition();
 
 	};
 }

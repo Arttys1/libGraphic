@@ -43,37 +43,41 @@ namespace libGraphic
 			return texture->getId();
 		return -1;
 	}
-	void Shape::addRotation(Vector3D angle)
+	void Shape::addRotationX(float axis)
 	{
-		transformation->addRotation(angle);
+		transformation->addRotationX(axis);
 	}
-	void Shape::addRotationTime(float rotationSpeed, Vector3D angle)
+	void Shape::addRotationY(float axis)
 	{
-		transformation->addRotationTime(rotationSpeed, angle);
+		transformation->addRotationY(axis);
 	}
-	void Shape::addTranslation(Vector3D trans)
+	void Shape::addRotationZ(float axis)
 	{
-		transformation->addTranslation(trans);
+		transformation->addRotationZ(axis);
 	}
-	void Shape::addTranslationTime(float translationSpeed, Vector3D trans)
+	void Shape::addTranslationX(float trans)
 	{
-		transformation->addTranslationTime(translationSpeed, trans);
+		transformation->addTranslationX(trans);
 	}
-	void Shape::addScale(Vector3D scale)
+	void Shape::addTranslationY(float trans)
 	{
-		transformation->addScale(scale);
+		transformation->addTranslationY(trans);
 	}
-	void Shape::addScale(float scalar)
+	void Shape::addTranslationZ(float trans)
 	{
-		transformation->addScale(scalar);
+		transformation->addTranslationZ(trans);
 	}
-	void Shape::addScaleTime(float scaleSpeed, Vector3D scale)
+	void Shape::addScaleX(float scale)
 	{
-		transformation->addScaleTime(scaleSpeed, scale);
+		transformation->addScaleX(scale);
 	}
-	void Shape::addScaleTime(float scaleSpeed, float scalar)
+	void Shape::addScaleY(float scale)
 	{
-		transformation->addScaleTime(scaleSpeed, scalar);
+		transformation->addScaleY(scale);
+	}
+	void Shape::addScaleZ(float scale)
+	{
+		transformation->addScaleZ(scale);
 	}
 	glm::mat4 Shape::getTransformation() const
 	{
