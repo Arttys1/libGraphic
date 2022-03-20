@@ -8,7 +8,7 @@ namespace libGraphic
 {
 	static int maxId;
 	Texture::Texture(const char* path) 
-		: data(nullptr), widthImage(0), heightImage(0), texture(0), id(++maxId)
+		: texture(0), id(++maxId)
 	{
 		glGenTextures(1, &texture);
 		glActiveTexture(GL_TEXTURE0 + id); // activate the texture unit first before binding texture
@@ -21,7 +21,8 @@ namespace libGraphic
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		// load and generate the texture
-		data = stbi_load(path, &widthImage, &heightImage, 0, 0);
+		int widthImage, heightImage;
+		unsigned char* data = stbi_load(path, &widthImage, &heightImage, 0, 0);
 		if (data)
 		{
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, widthImage, heightImage, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -31,11 +32,11 @@ namespace libGraphic
 		{
 			std::cout << "Failed to load texture" << std::endl;
 		}
+		STBI_FREE(data);
 	}
 	Texture::~Texture()
 	{
 		//clean memory
-		delete data;
 		glDeleteBuffers(1, &texture);
 	}
 	int Texture::getId() const

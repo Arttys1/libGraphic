@@ -38,14 +38,14 @@ namespace libGraphic
 	}
 	void Transformation::addScaleX(float scale)
 	{
-		transform = glm::scale(transform, glm::vec3(scale, 0.0f, 0.0f));
+		transform = glm::scale(transform, glm::vec3(scale, 1.0f, 1.0f));
 	}
 	void Transformation::addScaleY(float scale)
 	{
-		transform = glm::scale(transform, glm::vec3(0.0f, scale, 0.0f));
+		transform = glm::scale(transform, glm::vec3(1.0f, scale, 1.0f));
 	}
 	void Transformation::addScaleZ(float scale)
 	{
-		transform = glm::scale(transform, glm::vec3(0.0f, 0.0f, scale));
+		transform = glm::scale(transform, glm::vec3(1.0f, 1.0f, scale));
 	}
 }

@@ -7,9 +7,6 @@ namespace libGraphic
 	class Texture
 	{
 	private:
-		unsigned char* data;
-		int widthImage;
-		int heightImage;
 		unsigned int texture;
 		int id;
 	public:
