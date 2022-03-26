@@ -12,8 +12,8 @@ namespace libGraphic
 		float width;
 
 	public:
-		Rectangle(Vector3D* v, float width, float height, Color color) : Shape(v, color), height(height), width(width) { }
-		Rectangle(Vector3D *v, float width, float height) : Shape(v), height(height), width(width) { }
+		Rectangle(Vector3D v, float width, float height, Color color) : Shape(v, color), height(height), width(width) { }
+		Rectangle(Vector3D v, float width, float height) : Shape(v), height(height), width(width) { }
 		~Rectangle();
 
 		// Hérité via Shape

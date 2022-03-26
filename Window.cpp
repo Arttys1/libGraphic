@@ -34,7 +34,7 @@ namespace libGraphic
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
 		width(width), height(height), window(nullptr), collection(new ShapeCollection()),
 		backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height)),
-		framerateLimit(60), callBack()
+		framerateLimit(60), callBack(), light(Vector3D(), Color::BLACK(), 0.0f)
 	{
 		// Initialise GLFW
 		if (!glfwInit())
@@ -100,18 +100,22 @@ namespace libGraphic
 		glBindVertexArray(VAO);
 
 		//vertice coord 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
 
 		// texture coord attribute
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
+
+		//normal vector
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+		glEnableVertexAttribArray(2);
 
 		//get vertices array from our shapes
 		updateObjectPosition();
 
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 projection;
 		projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
 		//projection = glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.1f, 100.f);
@@ -121,6 +125,7 @@ namespace libGraphic
 
 		shader->setMat4("model", model);
 		shader->setMat4("projection", projection);
+
 
 		double timeToWaitAtEachFrame = (1.0 / framerateLimit) * 1000;
 
@@ -145,6 +150,16 @@ namespace libGraphic
 				callBack();
 			}
 
+			//set shader's uniform light value
+			shader->setVec3("ambientColor", Light::getAmbientColor().toGlmVec());
+			shader->setFloat("ambientStrength", Light::getAmbientStrenght());
+
+			shader->setVec3("lightPosition", light.getPosition().toGlmVec());
+			shader->setFloat("specularStrength", light.getStrength());
+			shader->setVec3("lightColor", light.getLightColor().toGlmVec());
+
+			shader->setVec3("cameraPosition", camera->getPosition());
+
 			//draw, color, texture and transform shape
 			int count = 0;
 			for (Shape *s : collection->getShapes())
@@ -152,7 +167,7 @@ namespace libGraphic
 				Color color = s->getColor();
 	
 				//set shader's uniform values
-				shader->setVec3("color", glm::vec3(color.getRed(), color.getGreen(), color.getBlue()));
+				shader->setVec3("color", color.toGlmVec());
 				shader->setMat4("transform", s->getTransformation());
 				shader->setBool("readTexture", s->useTexture());
 				shader->setInt("texture1", s->getIdTexture());
@@ -190,6 +205,10 @@ namespace libGraphic
 	void Window::addShape(Shape* s)
 	{
 		collection->add(s);
+	}
+	void Window::setLight(Light light)
+	{
+		this->light = light;
 	}
 	void Window::setBackgroundColor(Color color)
 	{

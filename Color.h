@@ -1,6 +1,7 @@
 #pragma once
 #ifndef H_COLOR
 #define H_COLOR
+#include "glm/vec3.hpp"
 
 namespace libGraphic
 {
@@ -16,6 +17,11 @@ namespace libGraphic
 		float getRed() const;
 		float getGreen() const;
 		float getBlue() const;
+		void setRed(float r);
+		void setGreen(float g);
+		void setBlue(float b);
+
+		glm::vec3 toGlmVec() const;
 
 		static Color WHITE() { return Color(1.0f, 1.0f, 1.0f); }
 		static Color BLACK() { return Color(0.f, 0.f, 0.f); }

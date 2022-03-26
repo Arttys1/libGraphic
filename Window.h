@@ -9,6 +9,7 @@
 #include "ShapeCollection.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Light.h"
 
 #include <functional>
 
@@ -23,9 +24,10 @@ namespace libGraphic
 		ShapeCollection* collection;
 		Shader* shader;
 		Camera* camera;
+		Light light;
 		Color backgroundColor;
 		unsigned char framerateLimit;
-		std::function<void()> callBack;
+		std::function<void()> callBack;		
 
 		void processInput(GLFWwindow *window);
 		void mouseInput(GLFWwindow *window);
@@ -35,6 +37,7 @@ namespace libGraphic
 		~Window();
 		void loop();
 		void addShape(Shape*);
+		void setLight(Light);
 		void setBackgroundColor(Color);
 		std::vector<Shape*> getShapes() const;
 		void setFramerateLimit(unsigned char limit);

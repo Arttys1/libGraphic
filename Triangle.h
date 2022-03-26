@@ -11,8 +11,8 @@ namespace libGraphic
 		float width, height;
 
 	public:
-		Triangle(Vector3D* pos, float width, float height, Color color) : Shape(pos, color), width(width), height(height) { }
-		Triangle(Vector3D* pos, float width, float height) : Shape(pos), width(width), height(height) { }
+		Triangle(Vector3D pos, float width, float height, Color color) : Shape(pos, color), width(width), height(height) { }
+		Triangle(Vector3D pos, float width, float height) : Shape(pos), width(width), height(height) { }
 		~Triangle();
 
 

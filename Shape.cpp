@@ -6,13 +6,12 @@ namespace libGraphic
 	{
 		delete texture;
 		delete transformation;
-		delete position;
 	}
 	Vector3D Shape::getposition() const
 	{
-		return *position;
+		return position;
 	}
-	void Shape::setPosition(Vector3D* v)
+	void Shape::setPosition(Vector3D v)
 	{
 		this->position = v;
 	}

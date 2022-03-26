@@ -155,6 +155,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="ITransformable.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="ITransformable.h" />
     <ClInclude Include="libGraphic.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />

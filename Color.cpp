@@ -20,4 +20,21 @@ namespace libGraphic
 	{
 		return b;
 	}
+	void Color::setRed(float r)
+	{
+		this->r = r;
+	}
+	void Color::setGreen(float g)
+	{
+		this->g = g;
+	}
+	void Color::setBlue(float b)
+	{
+		this->b = b;
+	}
+	glm::vec3 Color::toGlmVec() const
+	{
+		return glm::vec3(r, g, b);
+	}
+	
 }

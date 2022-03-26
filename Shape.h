@@ -13,21 +13,21 @@ namespace libGraphic
 	class Shape : public ITransformable
 	{
 	private:
-		Vector3D *position;
+		Vector3D position;
 		Transformation* transformation;
 		Color color;
 		Texture* texture;
 
 	public:
-		Shape(Vector3D* pos) : Shape(pos, Color::WHITE()){ }
-		Shape(Vector3D* pos, Color color) : position(pos), color(color), transformation(new Transformation()), texture(nullptr) { }
+		Shape(Vector3D pos) : Shape(pos, Color::WHITE()){ }
+		Shape(Vector3D pos, Color color) : position(pos), color(color), transformation(new Transformation()), texture(nullptr) { }
 		virtual ~Shape();
 
 		virtual std::vector<float> getVertices() = 0;
 		virtual unsigned int getCountTriangle() = 0;
 
 		Vector3D getposition() const;
-		void setPosition(Vector3D* v);
+		void setPosition(Vector3D v);
 		Color getColor() const;
 		void setColor(Color c);
 		

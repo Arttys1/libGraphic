@@ -23,5 +23,6 @@
 #include "Transformation.h"
 #include "Vector3D.h"
 #include "Camera.h"
+#include "Light.h"
 
 #endif //H_LIBGRAPHIC

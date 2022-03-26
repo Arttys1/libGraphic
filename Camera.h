@@ -27,6 +27,7 @@ namespace libGraphic
 		void left();
 
 		glm::mat4 getView() const;
+		glm::vec3 getPosition() const;
 		void setCameraSpead(float spead);
 		void moveCamera(float cursorPosX, float cursorPosY);
 		

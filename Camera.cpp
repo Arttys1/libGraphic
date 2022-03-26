@@ -30,6 +30,10 @@ namespace libGraphic
 	{
 		return glm::lookAt(cameraPosition, cameraPosition + cameraFront, cameraUp);
 	}
+	glm::vec3 Camera::getPosition() const
+	{
+		return cameraPosition;
+	}
 	void Camera::setCameraSpead(float spead)
 	{
 		this->spead = spead;
