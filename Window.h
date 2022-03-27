@@ -18,15 +18,20 @@ namespace libGraphic
 	class Window
 	{
 	private:
+		//Attributes who manage the windows
 		unsigned int width;
 		unsigned int height;
+		unsigned char framerateLimit;
 		GLFWwindow* window;
+		Color backgroundColor;
+
+		//Attributes who manage shapes and drawing of the scene
 		ShapeCollection* collection;
 		Shader* shader;
 		Camera* camera;
 		Light light;
-		Color backgroundColor;
-		unsigned char framerateLimit;
+		
+		
 		std::function<void()> callBack;		
 
 		void processInput(GLFWwindow *window);

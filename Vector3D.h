@@ -23,15 +23,22 @@ namespace libGraphic
 
 		glm::vec3 toGlmVec() const;
 
-		Vector3D operator*(Vector3D&) const;
-		Vector3D operator+(Vector3D&) const;
-		Vector3D operator-(Vector3D&) const;
-		Vector3D operator/(Vector3D&) const;
-		Vector3D operator*(float&) const;
-		Vector3D operator+(float&) const;
-		Vector3D operator-(float&) const;
-		Vector3D operator/(float&) const;
-
+		Vector3D operator*(const Vector3D&) const;
+		Vector3D operator+(const Vector3D&) const;
+		Vector3D operator-(const Vector3D&) const;
+		Vector3D operator/(const Vector3D&) const;
+		void operator*=(const Vector3D&);
+		void operator+=(const Vector3D&);
+		void operator-=(const Vector3D&);
+		void operator/=(const Vector3D&);
+		Vector3D operator*(float) const;
+		Vector3D operator+(float) const;
+		Vector3D operator-(float) const;
+		Vector3D operator/(float) const;
+		void operator*=(float);
+		void operator+=(float);
+		void operator-=(float);
+		void operator/=(float);
 	};
 }
 

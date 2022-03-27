@@ -35,36 +35,68 @@ namespace libGraphic
     {
         return glm::vec3(x, y, z);
     }
-    Vector3D Vector3D::operator*(Vector3D& v) const
+    Vector3D Vector3D::operator*(const Vector3D& v) const
     {
         return Vector3D(x * v.x, y * v.y, z * v.z);
     }
-    Vector3D Vector3D::operator+(Vector3D& v) const
+    Vector3D Vector3D::operator+(const Vector3D& v) const
     {
         return Vector3D(x + v.x, y + v.y, z + v.z);
     }
-    Vector3D Vector3D::operator-(Vector3D& v) const
+    Vector3D Vector3D::operator-(const Vector3D& v) const
     {
         return Vector3D(x - v.x, y - v.y, z - v.z);
     }
-    Vector3D Vector3D::operator/(Vector3D& v) const
+    Vector3D Vector3D::operator/(const Vector3D& v) const
     {
         return Vector3D(x / v.x, y / v.y, z / v.z);
     }
-    Vector3D Vector3D::operator*(float& f) const
+    void Vector3D::operator*=(const Vector3D& v)
+    {
+        *this = (*this) * v;
+    }
+    void Vector3D::operator+=(const Vector3D& v)
+    {
+        *this = *this + v;
+    }
+    void Vector3D::operator-=(const Vector3D& v)
+    {
+        *this = *this - v;
+    }
+    void Vector3D::operator/=(const Vector3D& v)
+    {
+        *this = *this / v;
+    }
+    Vector3D Vector3D::operator*(float f) const
     {
         return Vector3D(x * f, y * f, z * f);
     }
-    Vector3D Vector3D::operator+(float& f) const
+    Vector3D Vector3D::operator+(float f) const
     {
         return Vector3D(x + f, y + f, z + f);
     }
-    Vector3D Vector3D::operator-(float& f) const
+    Vector3D Vector3D::operator-(float f) const
     {
         return Vector3D(x - f, y - f, z - f);
     }
-    Vector3D Vector3D::operator/(float& f) const
+    Vector3D Vector3D::operator/(float f) const
     {
         return Vector3D(x / f, y / f, z / f);
+    }
+    void Vector3D::operator*=(float f)
+    {
+        *this = *this * f;
+    }
+    void Vector3D::operator+=(float f)
+    {
+        *this = *this + f;
+    }
+    void Vector3D::operator-=(float f)
+    {
+        *this = *this - f;
+    }
+    void Vector3D::operator/=(float f)
+    {
+        *this = *this / f;
     }
 }

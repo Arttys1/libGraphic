@@ -19,6 +19,10 @@ namespace libGraphic
 	{
 		return color;
 	}
+	bool Shape::isAffectByLight() const
+	{
+		return affectByLight;
+	}
 	void Shape::setColor(Color c)
 	{
 		this->color = c;
@@ -26,6 +30,10 @@ namespace libGraphic
 	void Shape::setTexture(Texture* texture)
 	{
 		this->texture = texture;
+	}
+	void Shape::setAffectByLight(bool affect)
+	{
+		affectByLight = affect;
 	}
 	bool Shape::useTexture() const
 	{

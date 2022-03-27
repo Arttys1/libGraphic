@@ -2,39 +2,120 @@
 
 namespace libGraphic
 {
-	Color::Color(unsigned char red, unsigned char green, unsigned char blue) : Color(red / 255.f, green / 255.f, blue / 255.f)
+	Color::Color(float red, float green, float blue) : rgb(red, green, blue)
 	{
 	}
-	Color::Color(float red, float green, float blue) : r(red), g(green), b(blue)
+	Color::Color(Vector3D rgb)
 	{
+		this->rgb = rgb;
 	}
 	float Color::getRed() const
 	{
-		return r;
+		return rgb.getX();
 	}
 	float Color::getGreen() const
 	{
-		return g;
+		return rgb.getY();
 	}
 	float Color::getBlue() const
 	{
-		return b;
+		return rgb.getZ();
 	}
 	void Color::setRed(float r)
 	{
-		this->r = r;
+		rgb.setX(r);
 	}
 	void Color::setGreen(float g)
 	{
-		this->g = g;
+		rgb.setX(g);
 	}
 	void Color::setBlue(float b)
 	{
-		this->b = b;
+		rgb.setX(b);
 	}
 	glm::vec3 Color::toGlmVec() const
 	{
-		return glm::vec3(r, g, b);
+		return rgb.toGlmVec();
 	}
 	
+	Color Color::operator*(const Color& c) const
+	{
+		return Color(rgb * c.rgb);
+	}
+
+	Color Color::operator+(const Color& c) const
+	{
+		return Color(rgb + c.rgb);
+	}
+
+	Color Color::operator-(const Color& c) const
+	{
+		return Color(rgb - c.rgb);
+	}
+
+	Color Color::operator/(const Color& c) const
+	{
+		return Color(rgb / c.rgb);
+	}
+
+	void Color::operator*=(const Color& c)
+	{
+		rgb *= c.rgb;
+	}
+
+	void Color::operator+=(const Color& c)
+	{
+		rgb += c.rgb;
+	}
+
+	void Color::operator-=(const Color& c)
+	{
+		rgb -= c.rgb;
+	}
+
+	void Color::operator/=(const Color& c)
+	{
+		rgb /= c.rgb;
+	}
+
+	Color Color::operator*(float f) const
+	{
+		return Color(rgb * f);
+	}
+
+	Color Color::operator+(float f) const
+	{
+		return Color(rgb + f);
+	}
+
+	Color Color::operator-(float f) const
+	{
+		return Color(rgb - f);
+	}
+
+	Color Color::operator/(float f) const
+	{
+		return Color(rgb / f);
+	}
+
+	void Color::operator*=(float f)
+	{
+		rgb *= f;
+	}
+
+	void Color::operator+=(float f)
+	{
+		rgb += f;
+	}
+
+	void Color::operator-=(float f)
+	{
+		rgb -= f;
+	}
+
+	void Color::operator/=(float f)
+	{
+		rgb /= f;
+	}
+
 }

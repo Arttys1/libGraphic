@@ -17,21 +17,25 @@ namespace libGraphic
 		Transformation* transformation;
 		Color color;
 		Texture* texture;
+		bool affectByLight;
 
 	public:
 		Shape(Vector3D pos) : Shape(pos, Color::WHITE()){ }
-		Shape(Vector3D pos, Color color) : position(pos), color(color), transformation(new Transformation()), texture(nullptr) { }
+		Shape(Vector3D pos, Color color) : position(pos), color(color), transformation(new Transformation()), texture(nullptr), affectByLight(true) { }
 		virtual ~Shape();
 
 		virtual std::vector<float> getVertices() = 0;
 		virtual unsigned int getCountTriangle() = 0;
 
-		Vector3D getposition() const;
-		void setPosition(Vector3D v);
+		Vector3D getposition() const;		
 		Color getColor() const;
-		void setColor(Color c);
-		
+		bool isAffectByLight() const;
+
+		void setPosition(Vector3D v);
+		void setColor(Color c);		
 		void setTexture(Texture* texture);
+		void setAffectByLight(bool affect);
+
 		bool useTexture() const;
 		int getIdTexture() const;
 

@@ -3,7 +3,6 @@ using namespace libGraphic;
 #include <iostream>
 
 Cube* cube;
-Vector3D vec;
 
 libGraphic::Window window(900, 600, "test");
 
@@ -22,15 +21,18 @@ int main()
 	window.setBackgroundColor(Color(0.f, 0.f, 0.35f));
 	window.setFramerateLimit(60);
 	window.setCallBackFunction(render);
-	//window.setLight(Light(Vector3D(0, 0, 2), Color::WHITE(), 0.5f));
+	window.setLight(Light(Vector3D(-2, 2, 2), Color::WHITE(), 1.f));
+	Light::setAmbientstrength(0.1f);
 
+	Color c(0, 0, 0);
+	c * 3;
 	/*Cube* sol = new Cube(Vector3D(-20, -1, 0), 40, 0.1f, 40);
 	sol->setTexture(new Texture("ciel.jpg"));
 	window.addShape(sol);*/
 
 
-	vec = Vector3D(-0.5f, -0.5f, -0.5f);
-	cube = new Cube(vec, 1.f, 1.f, 1.f, Color::CYAN());
+	Vector3D vec = Vector3D(-0.5f, -0.5f, -0.5f);
+	cube = new Cube(vec, 1.f, 1.f, 1.f, Color(1.0f, 0.5f, 0.31f));
 	/*cube->addScaleX(10);
 	cube->addScaleY(10);
 	cube->addScaleZ(10);*/

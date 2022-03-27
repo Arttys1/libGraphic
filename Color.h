@@ -3,16 +3,18 @@
 #define H_COLOR
 #include "glm/vec3.hpp"
 
+#include "Vector3D.h"
+
 namespace libGraphic
 {
 	class Color
 	{
 	private:
-		float r, g, b;
+		Vector3D rgb;
 
 	public:
-		Color(unsigned char red, unsigned char green, unsigned char blue);
 		Color(float red, float green, float blue);
+		Color(Vector3D rgb);
 
 		float getRed() const;
 		float getGreen() const;
@@ -32,7 +34,22 @@ namespace libGraphic
 		static Color CYAN() { return Color(0.f, 1.f, 1.f); }
 		static Color MAGENTA() { return Color(1.f, 0.f, 1.f); }
 
-		
+		Color operator*(const Color&) const;
+		Color operator+(const Color&) const;
+		Color operator-(const Color&) const;
+		Color operator/(const Color&) const;
+		void operator*=(const Color&);
+		void operator+=(const Color&);
+		void operator-=(const Color&);
+		void operator/=(const Color&);
+		Color operator*(float) const;
+		Color operator+(float) const;
+		Color operator-(float) const;
+		Color operator/(float) const;
+		void operator*=(float);
+		void operator+=(float);
+		void operator-=(float);
+		void operator/=(float);
 	};
 }
 
