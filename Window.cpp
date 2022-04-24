@@ -9,6 +9,7 @@
 #ifdef __linux__
 #include <unistd.h>
 #endif //__linux__
+#include "DirectionalLight.h"
 
 namespace libGraphic
 {
@@ -31,10 +32,66 @@ namespace libGraphic
 		camera->moveCamera((float)posX, (float)posY);
 		
 	}
+	void Window::processLighting()
+	{
+		char numPoint = 0;
+		for (auto it = lights.begin(); it != lights.end(); it++)
+		{
+			if ((*it))
+			{
+				switch ((*it)->getType())
+				{
+				case TypeLight::DIRECTIONAL:
+				{
+					DirectionalLight* dirLight = dynamic_cast<DirectionalLight*>(it->get());
+
+					shader->setVec3("dirLight.direction", dirLight->getDirection().toGlmVec());
+					shader->setVec3("dirLight.ambient", dirLight->getAmbient().toGlmVec());
+					shader->setVec3("dirLight.diffuse", dirLight->getDiffuse().toGlmVec());
+					shader->setVec3("dirLight.specular", dirLight->getSpecular().toGlmVec());
+					break;
+				}
+				case TypeLight::POINT:
+				{
+					std::string s = "pointLights[";
+					s += (numPoint + 48);
+					shader->setVec3(s + "].position", (*it)->getPosition().toGlmVec());
+					shader->setVec3(s + "].ambient", (*it)->getAmbient().toGlmVec());
+					shader->setVec3(s + "].diffuse", (*it)->getDiffuse().toGlmVec());
+					shader->setVec3(s + "].specular", (*it)->getSpecular().toGlmVec());
+					numPoint++;
+					break;
+				}
+				case TypeLight::SPOT:
+				{
+					break;
+				}
+				default:
+					break;
+				}
+			}
+		}
+
+		////set unuse point light value to 0.0
+		//for (char i = 0; i < 4; i++)
+		//{
+		//	std::string s = "pointLights[";
+		//	s += (i + 48);
+		//	shader->setFloat(s + "].ambient", 0.0f);
+		//	shader->setFloat(s + "].diffuse", 0.0f);
+		//	shader->setFloat(s + "].specular", 0.0f);
+		//}
+
+		//set shader's uniform light value
+			/*shader->setVec3("pointLights[0].position", light.getPosition().toGlmVec());
+			shader->setVec3("pointLights[0].ambient", Light::getAmbientColor().toGlmVec());
+			shader->setVec3("pointLights[0].diffuse", light.getDiffuseColor().toGlmVec());
+			shader->setVec3("pointLights[0].specular", light.getSpecularColor().toGlmVec());	*/
+	}
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
 		width(width), height(height), window(nullptr), collection(new ShapeCollection()),
 		backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height)),
-		framerateLimit(60), callBack(), light(Vector3D(), Color::BLACK(), 0.0f)
+		framerateLimit(60), callBack(), lights()
 	{
 		// Initialise GLFW
 		if (!glfwInit())
@@ -126,7 +183,6 @@ namespace libGraphic
 		shader->setMat4("model", model);
 		shader->setMat4("projection", projection);
 
-
 		double timeToWaitAtEachFrame = (1.0 / framerateLimit) * 1000;
 
 		while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
@@ -139,24 +195,18 @@ namespace libGraphic
 			mouseInput(window);
 
 			//clear screen and z-buffer
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);			
-
-			//set camera matrix
-			glm::mat4 view = camera->getView();
-			shader->setMat4("view", view);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);		
 
 			if (callBack)
 			{
 				callBack();
 			}
 
-			//set shader's uniform light value
-			shader->setVec3("ambientColor", Light::getAmbientColor().toGlmVec());
-			shader->setFloat("ambientStrength", Light::getAmbientStrenght());
+			//set camera matrix
+			glm::mat4 view = camera->getView();
+			shader->setMat4("view", view);
 
-			shader->setVec3("lightPosition", light.getPosition().toGlmVec());
-			shader->setFloat("specularStrength", light.getStrength());
-			shader->setVec3("lightColor", light.getLightColor().toGlmVec());
+			processLighting();	
 
 			shader->setVec3("cameraPosition", camera->getPosition());
 
@@ -167,7 +217,11 @@ namespace libGraphic
 				Color color = s->getColor();
 	
 				//set shader's uniform values
-				shader->setVec3("color", color.toGlmVec());
+				shader->setVec3("material.ambient", s->getColor().toGlmVec());
+				shader->setVec3("material.diffuse", s->getColor().toGlmVec());
+				shader->setVec3("material.specular", glm::vec3(0.5f));
+				shader->setFloat("material.shininess", 32.0f);
+
 				shader->setMat4("transform", s->getTransformation());
 				shader->setBool("readTexture", s->useTexture());
 				shader->setInt("texture1", s->getIdTexture());
@@ -206,9 +260,9 @@ namespace libGraphic
 	{
 		collection->add(s);
 	}
-	void Window::setLight(Light light)
+	void Window::addLight(Light* light)
 	{
-		this->light = light;
+		lights.push_back(light->clone());		
 	}
 	void Window::setBackgroundColor(Color color)
 	{

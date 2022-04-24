@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "Light.h"
 
+#include <memory>
 #include <functional>
 
 namespace libGraphic
@@ -29,20 +30,21 @@ namespace libGraphic
 		ShapeCollection* collection;
 		Shader* shader;
 		Camera* camera;
-		Light light;
+		std::vector<std::unique_ptr<Light>> lights;
 		
 		
 		std::function<void()> callBack;		
 
 		void processInput(GLFWwindow *window);
 		void mouseInput(GLFWwindow *window);
+		void processLighting();
 
 	public:
 		Window(unsigned int width = 900, unsigned int height = 600, const char* title = "");
 		~Window();
 		void loop();
 		void addShape(Shape*);
-		void setLight(Light);
+		void addLight(Light* light);
 		void setBackgroundColor(Color);
 		std::vector<Shape*> getShapes() const;
 		void setFramerateLimit(unsigned char limit);

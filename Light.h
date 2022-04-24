@@ -3,37 +3,40 @@
 #define H_LIGHT
 #include "Vector3D.h"
 #include "Color.h"
+#include <memory>
 
 namespace libGraphic
 {
+	enum class TypeLight
+	{
+		DIRECTIONAL, POINT, SPOT
+	};
+
 	class Light
 	{
 	private:
+		Color ambient, diffuse, specular;
 		Vector3D position;
-		Color lightColor;
-		float strength;
-
-		static Color ambientColor;
-		static float ambientStrenght;
-
 	public:
-		Light(Vector3D pos);
-		Light(Vector3D pos, Color color);
-		Light(Vector3D pos, float strength);
-		Light(Vector3D pos, Color color, float strength);		
+		Light();
+		Light(Vector3D position);
+		Light(Color color);
+		Light(Vector3D position, Color color);
+		Light(Color ambient, Color diffuse, Color specular);
+		Light(Vector3D position, Color ambient, Color diffuse, Color specular);
 
+		Color getAmbient() const;
+		Color getDiffuse() const;
+		Color getSpecular() const;
 		Vector3D getPosition() const;
-		Color getLightColor() const;
-		float getStrength() const;
 
+		void setAmbient(Color color);
+		void setDiffuse(Color color);
+		void setSpecular(Color color);
 		void setPosition(Vector3D pos);
-		void setLightColor(Color color);
-		void setStrenght(float strength);
 
-		static Color getAmbientColor();
-		static float getAmbientStrenght();
-		static void setAmbientColor(Color color);
-		static void setAmbientstrength(float strength);
+		virtual TypeLight getType() const = 0;
+		virtual std::unique_ptr<Light> clone() const = 0;
 	};
 }
 

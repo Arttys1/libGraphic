@@ -2,67 +2,68 @@
 
 namespace libGraphic 
 {
-	//init static attributes
-	Color Light::ambientColor = Color::WHITE();
-	float Light::ambientStrenght = 0.5f;
-
-	Light::Light(Vector3D pos) :
-		Light(pos, Color::WHITE(), 1.0f)
+	Light::Light()
+		: Light(Vector3D(), Color::WHITE(), Color::WHITE(), Color::WHITE())
 	{
 	}
-
-	Light::Light(Vector3D pos, Color color) :
-		Light(pos, color, 1.0f)
+	Light::Light(Vector3D position)
+		: Light(position, Color::WHITE(), Color::WHITE(), Color::WHITE())
 	{
 	}
-
-	Light::Light(Vector3D pos, float strength) :
-		Light(pos, Color::WHITE(), strength)
+	Light::Light(Color color)
+		: Light(Vector3D(), color, color, color)
 	{
 	}
-
-	Light::Light(Vector3D pos, Color color, float strength) :
-		position(pos), lightColor(color), strength(strength)
+	Light::Light(Vector3D position, Color color)
+		: Light(position, color, color, color)
 	{
+	}
+	Light::Light(Color ambient, Color diffuse, Color specular)
+		: Light(Vector3D(), ambient, diffuse, specular)
+	{
+	}
+	Light::Light(Vector3D position, Color ambient, Color diffuse, Color specular)
+		: position(position), ambient(ambient), diffuse(diffuse), specular(specular)
+	{
+	}
+	/*Light::Light(Light* other)
+		: Light(other->position, other->ambient, other->diffuse, other->specular)
+	{
+	}
+	Light::Light(Light& other)
+		: Light(other.position, other.ambient, other.diffuse, other.specular)
+	{
+	}*/
+	Color Light::getAmbient() const
+	{
+		return ambient;
+	}
+	Color Light::getDiffuse() const
+	{
+		return diffuse;
+	}
+	Color Light::getSpecular() const
+	{
+		return specular;
 	}
 	Vector3D Light::getPosition() const
 	{
 		return position;
 	}
-	Color Light::getLightColor() const
+	void Light::setAmbient(Color color)
 	{
-		return lightColor;
+		this->ambient = color;
 	}
-	float Light::getStrength() const
+	void Light::setDiffuse(Color color)
 	{
-		return strength;
+		this->diffuse = color;
+	}
+	void Light::setSpecular(Color color)
+	{
+		this->specular = color;
 	}
 	void Light::setPosition(Vector3D pos)
 	{
 		position = pos;
-	}
-	void Light::setLightColor(Color color)
-	{
-		lightColor = color;
-	}
-	void Light::setStrenght(float strength)
-	{
-		this->strength = strength;
-	}
-	Color Light::getAmbientColor()
-	{
-		return Light::ambientColor;
-	}
-	float Light::getAmbientStrenght()
-	{
-		return Light::ambientStrenght;
-	}
-	void Light::setAmbientColor(Color color)
-	{
-		Light::ambientColor = color;
-	}
-	void Light::setAmbientstrength(float strength)
-	{
-		Light::ambientStrenght = strength;
 	}
 }
