@@ -70,4 +70,8 @@ namespace libGraphic
 	{
 		return 12;
 	}
+	std::unique_ptr<Shape> Cube::clone() const
+	{
+		return std::make_unique<Cube>(*this);
+	}
 }

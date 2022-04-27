@@ -11,10 +11,6 @@
 
 namespace libGraphic
 {
-	enum class TransformationType {
-		ROTATION, TRANSLATION, SCALE
-	};
-
 	class Transformation : ITransformable
 	{
 	private:

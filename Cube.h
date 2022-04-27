@@ -15,5 +15,6 @@ namespace libGraphic
 		// Hérité via Shape
 		virtual std::vector<float> getVertices() override;
 		virtual unsigned int getCountTriangle() override;
+		virtual std::unique_ptr<Shape> clone() const override;
 	};
 }

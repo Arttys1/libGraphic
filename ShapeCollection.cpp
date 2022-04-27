@@ -5,21 +5,17 @@ namespace libGraphic
 {
 	ShapeCollection::~ShapeCollection()
 	{
-		for (Shape* shape : shapes)
-		{
-			delete shape;			
-		}
 	}
-	void ShapeCollection::add(Shape*s)
+	void ShapeCollection::add(const Shape& s)
 	{
-		shapes.push_back(s);
+		shapes.push_back(s.clone());
 	}
 	std::vector<float> ShapeCollection::getVertices() const
 	{
 		std::vector<float> tab;
-		for (Shape* shape : shapes)
+		for (auto it = shapes.begin(); it != shapes.end(); it++)
 		{
-			std::vector<float> vertices = shape->getVertices();
+			std::vector<float> vertices = (*it)->getVertices();
 			tab.insert(tab.end(), vertices.begin(), vertices.end());
 		}
 
@@ -29,14 +25,14 @@ namespace libGraphic
 	{
 		unsigned int count = 0;
 
-		for (Shape* s : shapes)
+		for (auto it = shapes.begin(); it != shapes.end(); it++)
 		{
-			count += s->getCountTriangle();
+			count += (*it)->getCountTriangle();
 		}
 
 		return count;
 	}
-	std::vector<Shape*> ShapeCollection::getShapes() const
+	std::vector<std::unique_ptr<Shape>>& ShapeCollection::getShapes()
 	{
 		return shapes;
 	}

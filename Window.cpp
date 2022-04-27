@@ -16,20 +16,20 @@ namespace libGraphic
 	void Window::processInput(GLFWwindow* window)
 	{
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_UP))
-			camera->advance();
+			camera.advance();
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_DOWN))
-			camera->stepBack();
+			camera.stepBack();
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_LEFT))
-			camera->left();
+			camera.left();
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT))
-			camera->right();
+			camera.right();
 
 	}
 	void Window::mouseInput(GLFWwindow* window)
 	{
 		double posX, posY;
 		glfwGetCursorPos(window, &posX, &posY);
-		camera->moveCamera((float)posX, (float)posY);
+		camera.moveCamera((float)posX, (float)posY);
 		
 	}
 	void Window::processLighting()
@@ -89,8 +89,8 @@ namespace libGraphic
 			shader->setVec3("pointLights[0].specular", light.getSpecularColor().toGlmVec());	*/
 	}
 	Window::Window(unsigned int width, unsigned int height, const char* title) :
-		width(width), height(height), window(nullptr), collection(new ShapeCollection()),
-		backgroundColor(Color::BLACK()), shader(nullptr), camera(new Camera(width, height)),
+		width(width), height(height), window(nullptr), collection(),
+		backgroundColor(Color::BLACK()), shader(nullptr), camera(width, height),
 		framerateLimit(60), callBack(), lights()
 	{
 		// Initialise GLFW
@@ -136,8 +136,6 @@ namespace libGraphic
 	Window::~Window()
 	{
 		delete shader;
-		delete collection;
-		delete camera;
 		glfwTerminate();
 	}
 
@@ -203,31 +201,32 @@ namespace libGraphic
 			}
 
 			//set camera matrix
-			glm::mat4 view = camera->getView();
+			glm::mat4 view = camera.getView();
 			shader->setMat4("view", view);
 
 			processLighting();	
 
-			shader->setVec3("cameraPosition", camera->getPosition());
+			shader->setVec3("cameraPosition", camera.getPosition());
 
 			//draw, color, texture and transform shape
 			int count = 0;
-			for (Shape *s : collection->getShapes())
+			auto &shapes = collection.getShapes();
+			for (auto s = shapes.begin(); s != shapes.end(); s++)
 			{
-				Color color = s->getColor();
+				Color color = (*s)->getColor();
 	
 				//set shader's uniform values
-				shader->setVec3("material.ambient", s->getColor().toGlmVec());
-				shader->setVec3("material.diffuse", s->getColor().toGlmVec());
+				shader->setVec3("material.ambient", (*s)->getColor().toGlmVec());
+				shader->setVec3("material.diffuse", (*s)->getColor().toGlmVec());
 				shader->setVec3("material.specular", glm::vec3(0.5f));
 				shader->setFloat("material.shininess", 32.0f);
 
-				shader->setMat4("transform", s->getTransformation());
-				shader->setBool("readTexture", s->useTexture());
-				shader->setInt("texture1", s->getIdTexture());
+				shader->setMat4("transform", (*s)->getTransformation());
+				shader->setBool("readTexture", (*s)->useTexture());
+				shader->setInt("texture1", (*s)->getIdTexture());
 
-				glDrawArrays(GL_TRIANGLES, count , 3 * s->getCountTriangle());
-				count += 3 * s->getCountTriangle();
+				glDrawArrays(GL_TRIANGLES, count , 3 * (*s)->getCountTriangle());
+				count += 3 * (*s)->getCountTriangle();
 			}
 
 			// Swap buffers
@@ -256,21 +255,21 @@ namespace libGraphic
 		glDeleteBuffers(1, &bufferId);
 
 	}
-	void Window::addShape(Shape* s)
+	void Window::addShape(const Shape& s)
 	{
-		collection->add(s);
+		collection.add(s);
 	}
-	void Window::addLight(Light* light)
+	void Window::addLight(const Light& light)
 	{
-		lights.push_back(light->clone());		
+		lights.push_back(light.clone());		
 	}
 	void Window::setBackgroundColor(Color color)
 	{
 		this->backgroundColor = color;
 	}
-	std::vector<Shape*> Window::getShapes() const
+	std::vector<std::unique_ptr<Shape>>& Window::getShapes()
 	{
-		return collection->getShapes();
+		return collection.getShapes();
 	}
 	void Window::setFramerateLimit(unsigned char limit)
 	{
@@ -283,7 +282,7 @@ namespace libGraphic
 	void Window::updateObjectPosition()
 	{
 		//(re)bind the buffer with the data of our shapes vertices
-		std::vector<float> vertices = collection->getVertices();
+		std::vector<float> vertices = collection.getVertices();
 		if (vertices.size() != 0)
 		{
 			glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);

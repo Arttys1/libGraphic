@@ -5,7 +5,7 @@ namespace libGraphic
 	Shape::~Shape()
 	{
 		delete texture;
-		delete transformation;
+		//delete transformation;
 	}
 	Vector3D Shape::getposition() const
 	{
@@ -52,42 +52,42 @@ namespace libGraphic
 	}
 	void Shape::addRotationX(float axis)
 	{
-		transformation->addRotationX(axis);
+		transformation.addRotationX(axis);
 	}
 	void Shape::addRotationY(float axis)
 	{
-		transformation->addRotationY(axis);
+		transformation.addRotationY(axis);
 	}
 	void Shape::addRotationZ(float axis)
 	{
-		transformation->addRotationZ(axis);
+		transformation.addRotationZ(axis);
 	}
 	void Shape::addTranslationX(float trans)
 	{
-		transformation->addTranslationX(trans);
+		transformation.addTranslationX(trans);
 	}
 	void Shape::addTranslationY(float trans)
 	{
-		transformation->addTranslationY(trans);
+		transformation.addTranslationY(trans);
 	}
 	void Shape::addTranslationZ(float trans)
 	{
-		transformation->addTranslationZ(trans);
+		transformation.addTranslationZ(trans);
 	}
 	void Shape::addScaleX(float scale)
 	{
-		transformation->addScaleX(scale);
+		transformation.addScaleX(scale);
 	}
 	void Shape::addScaleY(float scale)
 	{
-		transformation->addScaleY(scale);
+		transformation.addScaleY(scale);
 	}
 	void Shape::addScaleZ(float scale)
 	{
-		transformation->addScaleZ(scale);
+		transformation.addScaleZ(scale);
 	}
 	glm::mat4 Shape::getTransformation() const
 	{
-		return transformation->getTransformation();
+		return transformation.getTransformation();
 	}
 }

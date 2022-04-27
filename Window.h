@@ -27,9 +27,9 @@ namespace libGraphic
 		Color backgroundColor;
 
 		//Attributes who manage shapes and drawing of the scene
-		ShapeCollection* collection;
+		ShapeCollection collection;
 		Shader* shader;
-		Camera* camera;
+		Camera camera;
 		std::vector<std::unique_ptr<Light>> lights;
 		
 		
@@ -43,10 +43,10 @@ namespace libGraphic
 		Window(unsigned int width = 900, unsigned int height = 600, const char* title = "");
 		~Window();
 		void loop();
-		void addShape(Shape*);
-		void addLight(Light* light);
+		void addShape(const Shape& s);
+		void addLight(const Light& light);
 		void setBackgroundColor(Color);
-		std::vector<Shape*> getShapes() const;
+		std::vector<std::unique_ptr<Shape>>& getShapes();
 		void setFramerateLimit(unsigned char limit);
 		void setCallBackFunction(void());
 		void updateObjectPosition();
