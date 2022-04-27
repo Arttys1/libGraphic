@@ -10,6 +10,7 @@
 #include <unistd.h>
 #endif //__linux__
 #include "DirectionalLight.h"
+#include "SpotLight.h"
 
 namespace libGraphic
 {
@@ -64,6 +65,14 @@ namespace libGraphic
 				}
 				case TypeLight::SPOT:
 				{
+					SpotLight* light = dynamic_cast<SpotLight*>(it->get());
+					shader->setVec3("spotLight.position", light->getPosition().toGlmVec());
+					shader->setVec3("spotLight.direction", light->getDirection().toGlmVec());
+					shader->setVec3("spotLight.ambient", light->getAmbient().toGlmVec());
+					shader->setVec3("spotLight.diffuse", light->getDiffuse().toGlmVec());
+					shader->setVec3("spotLight.specular", light->getSpecular().toGlmVec());
+					shader->setFloat("spotLight.cutOff", light->getCutOff());
+					shader->setFloat("spotLight.outCutOff", light->getOuterCutOff());
 					break;
 				}
 				default:

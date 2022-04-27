@@ -32,5 +32,6 @@
 #include "Light.h"
 #include "PointLight.h"
 #include "DirectionalLight.h"
+#include "SpotLight.h"
 
 #endif //H_LIBGRAPHIC
