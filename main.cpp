@@ -27,9 +27,9 @@ int main()
 	//window.addLight(point2);
 	window.addLight(dirLight);
 
-	/*Cube* sol = new Cube(Vector3D(-20, -1, 0), 40, 0.1f, 40);
-	sol->setTexture(new Texture("ciel.jpg"));
-	window.addShape(sol);*/
+	Cube sol(Vector3D(-20, -1, 0), 40, 0.1f, 40);
+	sol.setTexture(Texture::LoadTexture("ciel.jpg"));
+	window.addShape(sol);
 
 
 	Vector3D vec = Vector3D(-0.5f, -0.5f, -0.5f);
@@ -37,8 +37,9 @@ int main()
 	/*cube->addScaleX(10);
 	cube->addScaleY(10);
 	cube->addScaleZ(10);*/
-	//cube->setTexture(new Texture("universe.png"));
+	cube.setTexture(Texture::LoadTexture("universe.png"));
 	Cube cube2(Vector3D(1.5f, -0.5f, -0.5f), 1.f, 1.f, 1.f, Color::CYAN());
+	cube2.setTexture(Texture::LoadTexture("universe.png"));
 	window.addShape(cube2);
 	window.addShape(cube);
 	

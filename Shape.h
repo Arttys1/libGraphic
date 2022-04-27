@@ -17,7 +17,7 @@ namespace libGraphic
 		Vector3D position;
 		Transformation transformation;
 		Color color;
-		Texture* texture;
+		std::shared_ptr<Texture> texture;
 		bool affectByLight;
 
 	public:
@@ -35,7 +35,7 @@ namespace libGraphic
 
 		void setPosition(Vector3D v);
 		void setColor(Color c);		
-		void setTexture(Texture* texture);
+		void setTexture(std::shared_ptr<Texture> texture);
 		void setAffectByLight(bool affect);
 
 		bool useTexture() const;

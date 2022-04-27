@@ -123,9 +123,6 @@ namespace libGraphic
 		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		//init Texture
-		Texture::initTexture();
-
 		//define defaults shaders
 		const char* vertexShaderSource = "shader/vertexShader.glsl";
 		const char* fragmentShaderSource = "shader/fragmentShader.glsl";

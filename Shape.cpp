@@ -4,8 +4,6 @@ namespace libGraphic
 {
 	Shape::~Shape()
 	{
-		delete texture;
-		//delete transformation;
 	}
 	Vector3D Shape::getposition() const
 	{
@@ -27,7 +25,7 @@ namespace libGraphic
 	{
 		this->color = c;
 	}
-	void Shape::setTexture(Texture* texture)
+	void Shape::setTexture(std::shared_ptr<Texture> texture)
 	{
 		this->texture = texture;
 	}
@@ -46,8 +44,10 @@ namespace libGraphic
 	}
 	int Shape::getIdTexture() const
 	{
-		if(texture)
+		if (texture)
+		{
 			return texture->getId();
+		}
 		return -1;
 	}
 	void Shape::addRotationX(float axis)

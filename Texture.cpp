@@ -6,7 +6,9 @@
 
 namespace libGraphic
 {
-	static int maxId;
+	int Texture::maxId = 0;
+	std::unordered_map<std::string, std::shared_ptr<Texture>> Texture::textureLoaded;
+
 	Texture::Texture(const char* path) 
 		: texture(0), id(++maxId)
 	{
@@ -48,8 +50,20 @@ namespace libGraphic
 		glActiveTexture(GL_TEXTURE0 + id);
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
-	void Texture::initTexture()
+	std::shared_ptr<Texture> Texture::LoadTexture(const std::string filePath)
 	{
-		maxId = 0;
+		std::shared_ptr<Texture> texture = nullptr;
+		try
+		{
+			texture = textureLoaded.at(filePath);
+		}
+		catch (std::out_of_range exception)
+		{
+			//ajout de la texture dans la table de hashage si elle n'y est pas
+			texture = std::make_shared<Texture>(filePath.c_str());
+			textureLoaded.insert(std::pair<std::string, std::shared_ptr<Texture>>(filePath, texture));
+		}
+
+		return texture;
 	}
 }

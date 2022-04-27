@@ -2,11 +2,17 @@
 #ifndef H_TEXTURE
 #define H_TEXTURE
 
+#include <memory>
+#include <unordered_map>
+
 namespace libGraphic
 {
 	class Texture
 	{
 	private:
+		static std::unordered_map<std::string, std::shared_ptr<Texture>> textureLoaded;
+		static int maxId;
+
 		unsigned int texture;
 		int id;
 	public:
@@ -15,7 +21,8 @@ namespace libGraphic
 		int getId() const;
 
 		void use();
-		static void initTexture();
+		static std::shared_ptr<Texture> LoadTexture(const std::string filePath);
+
 	};
 }
 
