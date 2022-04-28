@@ -1,6 +1,5 @@
 #include "Triangle.h"
 
-
 namespace libGraphic {
     Triangle::~Triangle()
     {
@@ -9,7 +8,6 @@ namespace libGraphic {
     std::vector<float> Triangle::getVertices()
     {
         Vector3D pos = getposition();
-        Color c = getColor();
         std::vector<float> vertices{
             pos.getX(), pos.getY(), pos.getZ(),             1.0f, 1.0f,
             pos.getX() + width, pos.getY(), pos.getZ(),     0.0f, 1.0f,

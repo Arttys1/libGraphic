@@ -218,14 +218,13 @@ namespace libGraphic
 			int count = 0;
 			auto &shapes = collection.getShapes();
 			for (auto s = shapes.begin(); s != shapes.end(); s++)
-			{
-				Color color = (*s)->getColor();
-	
+			{	
+				Material material = (*s)->getMaterial();
 				//set shader's uniform values
-				shader->setVec3("material.ambient", (*s)->getColor().toGlmVec());
-				shader->setVec3("material.diffuse", (*s)->getColor().toGlmVec());
-				shader->setVec3("material.specular", glm::vec3(0.5f));
-				shader->setFloat("material.shininess", 32.0f);
+				shader->setVec3("material.ambient", material.getAmbiant().toGlmVec());
+				shader->setVec3("material.diffuse", material.getDiffuse().toGlmVec());
+				shader->setVec3("material.specular", material.getSpecular().toGlmVec());
+				shader->setFloat("material.shininess", material.getShininess());
 
 				shader->setMat4("transform", (*s)->getTransformation());
 				shader->setBool("readTexture", (*s)->useTexture());

@@ -24,8 +24,8 @@ int main()
 	DirectionalLight dirLight(Vector3D(-0.2f, -1.0f, -0.3f), Color(0.05f, 0.05f, 0.05f), Color(0.4f, 0.4f, 0.4f), Color(0.5f, 0.5f, 0.5f));
 	SpotLight spot(Vector3D(0.f, -1.f, 0.f), Vector3D(0.f, 1.f, 2.f), Color(0.05f, 0.05f, 0.05f), Color::WHITE(), Color::WHITE());
 	window.addLight(point);
-	//window.addLight(point2);
-	window.addLight(dirLight);
+	window.addLight(point2);
+	//window.addLight(dirLight);
 	//window.addLight(spot);
 
 	Cube sol(Vector3D(-20, -1, 0), 40, 0.1f, 40);

@@ -9,13 +9,13 @@ namespace libGraphic
 	{
 		return position;
 	}
+	Material Shape::getMaterial() const
+	{
+		return material;
+	}
 	void Shape::setPosition(Vector3D v)
 	{
 		this->position = v;
-	}
-	Color Shape::getColor() const
-	{
-		return color;
 	}
 	bool Shape::isAffectByLight() const
 	{
@@ -23,7 +23,11 @@ namespace libGraphic
 	}
 	void Shape::setColor(Color c)
 	{
-		this->color = c;
+		this->material = Material(c, material.getShininess());
+	}
+	void Shape::setMaterial(Material material)
+	{
+		this->material = material;
 	}
 	void Shape::setTexture(std::shared_ptr<Texture> texture)
 	{

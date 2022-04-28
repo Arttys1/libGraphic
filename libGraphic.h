@@ -2,12 +2,6 @@
 #ifndef H_LIBGRAPHIC
 #define H_LIBGRAPHIC
 
-//
-//Things to do :
-// implement spotlight in fragment shader
-// implement Material class
-//
-
 //include openGL headers
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
@@ -33,5 +27,6 @@
 #include "PointLight.h"
 #include "DirectionalLight.h"
 #include "SpotLight.h"
+#include "Material.h"
 
 #endif //H_LIBGRAPHIC

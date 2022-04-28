@@ -8,6 +8,7 @@
 #include "ITransformable.h"
 #include "Texture.h"
 #include "Vector3D.h"
+#include "Material.h"
 
 namespace libGraphic
 {
@@ -16,13 +17,13 @@ namespace libGraphic
 	private:
 		Vector3D position;
 		Transformation transformation;
-		Color color;
+		Material material;
 		std::shared_ptr<Texture> texture;
 		bool affectByLight;
 
 	public:
 		Shape(Vector3D pos) : Shape(pos, Color::WHITE()){ }
-		Shape(Vector3D pos, Color color) : position(pos), color(color), transformation(), texture(nullptr), affectByLight(true) { }
+		Shape(Vector3D pos, Color color) : position(pos), material(color), transformation(), texture(nullptr), affectByLight(true) { }
 		virtual ~Shape();
 
 		virtual std::vector<float> getVertices() = 0;
@@ -30,11 +31,12 @@ namespace libGraphic
 		virtual std::unique_ptr<Shape> clone() const = 0;
 
 		Vector3D getposition() const;		
-		Color getColor() const;
+		Material getMaterial() const;
 		bool isAffectByLight() const;
 
 		void setPosition(Vector3D v);
-		void setColor(Color c);		
+		void setColor(Color c);
+		void setMaterial(Material material);
 		void setTexture(std::shared_ptr<Texture> texture);
 		void setAffectByLight(bool affect);
 
